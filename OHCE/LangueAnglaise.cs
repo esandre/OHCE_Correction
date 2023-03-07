@@ -8,5 +8,5 @@ public class LangueAnglaise : ILangue
     public string Salutation => Expressions.Hello;
 
     /// <inheritdoc />
-    public string Acquittance { get; }
+    public string Acquittance => Expressions.Goodbye;
 }

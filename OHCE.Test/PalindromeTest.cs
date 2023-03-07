@@ -74,8 +74,8 @@ public class PalindromeTest
 
     public static IEnumerable<object[]> CasAuRevoirTest => new[]
     {
-        //new object[] { new LangueAnglaise(), "epsi" },
-        //new object[] { new LangueAnglaise(), "radar" },
+        new object[] { new LangueAnglaise(), "epsi" },
+        new object[] { new LangueAnglaise(), "radar" },
         new object[] { new LangueFrançaise(), "epsi" },
         new object[] { new LangueFrançaise(), "radar" }
     };
