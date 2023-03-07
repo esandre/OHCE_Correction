@@ -27,4 +27,17 @@ public class LangueFrançaiseTest
         // ALORS on obtient "Bonjour"
         Assert.Equal(Expressions.Bonjour, félicitations);
     }
+
+    [Fact]
+    public void AuRevoirTest()
+    {
+        // ETANT DONNE la langue française
+        var langue = new LangueFrançaise();
+
+        // QUAND demande comment s'acquitter
+        var félicitations = langue.Acquittance;
+
+        // ALORS on obtient "Au revoir"
+        Assert.Equal(Expressions.AuRevoir, félicitations);
+    }
 }

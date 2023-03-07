@@ -6,4 +6,7 @@ public class LangueAnglaise : ILangue
 
     /// <inheritdoc />
     public string Salutation => Expressions.Hello;
+
+    /// <inheritdoc />
+    public string Acquittance { get; }
 }

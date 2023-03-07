@@ -7,4 +7,7 @@ internal class LangueStub : ILangue
 
     /// <inheritdoc />
     public string Salutation => default!;
+
+    /// <inheritdoc />
+    public string Acquittance => default!;
 }

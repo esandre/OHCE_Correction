@@ -72,20 +72,27 @@ public class PalindromeTest
         Assert.StartsWith(langue.Salutation, résultat);
     }
 
-    [Theory]
-    [InlineData("epsi")]
-    [InlineData("radar")]
-    public void AuRevoirTest(string chaîne)
+    public static IEnumerable<object[]> CasAuRevoirTest => new[]
     {
+        //new object[] { new LangueAnglaise(), "epsi" },
+        //new object[] { new LangueAnglaise(), "radar" },
+        new object[] { new LangueFrançaise(), "epsi" },
+        new object[] { new LangueFrançaise(), "radar" }
+    };
+
+    [Theory]
+    [MemberData(nameof(CasAuRevoirTest))]
+    public void AuRevoirTest(ILangue langue, string chaîne)
+    {
+        // ETANT DONNE un utilisateur parlant une langue
+        var ohce = new DétectionPalindromeBuilder()
+            .AyantPourLangue(langue)
+            .Build();
+
         // QUAND on saisit une chaîne
-        var résultat = DétectionPalindromeBuilder.Default.TraiterChaîne(chaîne);
+        var résultat = ohce.TraiterChaîne(chaîne);
 
-        // ALORS « Au revoir » est envoyé en dernier
-        Assert.EndsWith(Expressions.AuRevoir, résultat);
+        // ALORS le « Au revoir » de cette langue est envoyé en dernier
+        Assert.EndsWith(langue.Acquittance, résultat);
     }
-
-    
-    
-    // ETANT DONNE un utilisateur parlant une langue QUAND
-    //    on saisit une chaîne ALORS<auRevoir> dans cette langue est envoyé en dernier
 }
