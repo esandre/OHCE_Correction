@@ -14,4 +14,17 @@ public class LangueAnglaiseTest
         // ALORS on obtient "Well said"
         Assert.Equal(Expressions.WellSaid, félicitations);
     }
+
+    [Fact]
+    public void HelloTest()
+    {
+        // ETANT DONNE la langue anglaise
+        var langue = new LangueAnglaise();
+
+        // QUAND demande comment saluer
+        var félicitations = langue.Salutation;
+
+        // ALORS on obtient "Hello"
+        Assert.Equal(Expressions.Hello, félicitations);
+    }
 }

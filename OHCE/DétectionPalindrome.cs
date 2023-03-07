@@ -13,7 +13,7 @@ public class DétectionPalindrome
     {
         var miroir = new string(chaîne.Reverse().ToArray());
 
-        if(miroir.Equals(chaîne)) return Expressions.Bonjour + miroir + _langue.Félicitations + Expressions.AuRevoir;
-        return Expressions.Bonjour + miroir + Expressions.AuRevoir;
+        if(miroir.Equals(chaîne)) return _langue.Salutation + miroir + _langue.Félicitations + Expressions.AuRevoir;
+        return _langue.Salutation + miroir + Expressions.AuRevoir;
     }
 }

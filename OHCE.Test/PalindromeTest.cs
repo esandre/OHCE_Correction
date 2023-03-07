@@ -48,13 +48,19 @@ public class PalindromeTest
         Assert.StartsWith(langue.Félicitations, résultatAprèsPalindrome);
     }
 
+    public static IEnumerable<object[]> CasBonjourTest => new[]
+    {
+        new object[] { new LangueAnglaise(), "epsi" },
+        new object[] { new LangueAnglaise(), "radar" },
+        new object[] { new LangueFrançaise(), "epsi" },
+        new object[] { new LangueFrançaise(), "radar" }
+    };
+
     [Theory]
-    [InlineData("epsi")]
-    [InlineData("radar")]
-    public void BonjourTest(string chaîne)
+    [MemberData(nameof(CasBonjourTest))]
+    public void BonjourTest(ILangue langue, string chaîne)
     {
         // ETANT DONNE un utilisateur parlant une langue
-        var langue = new LangueFrançaise();
         var ohce = new DétectionPalindromeBuilder()
             .AyantPourLangue(langue)
             .Build();
