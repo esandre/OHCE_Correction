@@ -17,7 +17,7 @@ public class PalindromeTest
         Assert.Contains(résultatAttendu, résultat);
     }
 
-    public static IEnumerable<object[]> CasBienDitTest => new CartesianData(Langues);
+    public static IEnumerable<object[]> CasBienDitTest => new CartesianData(PrimitivesCartésiennes.Langues);
 
     [Theory]
     [MemberData(nameof(CasBienDitTest))]
@@ -43,17 +43,11 @@ public class PalindromeTest
         Assert.StartsWith(langue.Félicitations, résultatAprèsPalindrome);
     }
 
-    private static IEnumerable<ILangue> Langues 
-        => new ILangue[] { new LangueAnglaise(), new LangueFrançaise() };
-
     private static IEnumerable<string> ChaînesATester 
         => new[] { "epsi", "radar" };
 
-    private static IEnumerable<PériodeJournée> PériodesJournée
-        => new[] { PériodeJournée.Default, PériodeJournée.Matin, PériodeJournée.AprèsMidi, PériodeJournée.Soir, PériodeJournée.Nuit };
-
     public static IEnumerable<object[]> CasBonjourTest 
-        => new CartesianData(Langues, PériodesJournée, ChaînesATester);
+        => new CartesianData(PrimitivesCartésiennes.Langues, PrimitivesCartésiennes.PériodesJournée, ChaînesATester);
 
     [Theory]
     [MemberData(nameof(CasBonjourTest))]
@@ -74,7 +68,7 @@ public class PalindromeTest
     }
 
     public static IEnumerable<object[]> CasAuRevoirTest
-        => new CartesianData(Langues, PériodesJournée, ChaînesATester);
+        => new CartesianData(PrimitivesCartésiennes.Langues, PrimitivesCartésiennes.PériodesJournée, ChaînesATester);
 
     [Theory]
     [MemberData(nameof(CasAuRevoirTest))]

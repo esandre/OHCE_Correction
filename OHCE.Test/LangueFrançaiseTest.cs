@@ -1,4 +1,6 @@
-﻿namespace OHCE.Test;
+﻿using OHCE.Test.Utilities;
+
+namespace OHCE.Test;
 
 public class LangueFrançaiseTest
 {
@@ -15,14 +17,8 @@ public class LangueFrançaiseTest
         Assert.Equal(Expressions.BienDit, félicitations);
     }
 
-    public static IEnumerable<object[]> PériodesJournée => new[]
-    {
-        new object[] { PériodeJournée.Default },
-        new object[] { PériodeJournée.Matin },
-        new object[] { PériodeJournée.AprèsMidi },
-        new object[] { PériodeJournée.Soir },
-        new object[] { PériodeJournée.Nuit },
-    };
+    public static IEnumerable<object[]> PériodesJournée 
+        => new CartesianData(PrimitivesCartésiennes.PériodesJournée);
 
     [Theory]
     [MemberData(nameof(PériodesJournée))]
