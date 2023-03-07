@@ -25,17 +25,18 @@ public class PalindromeTest
         var résultat = DétectionPalindrome.Traiter(palindrome);
 
         // ALORS celui-ci est renvoyé
-        Assert.StartsWith(palindrome, résultat);
+        Assert.Contains(palindrome, résultat);
 
         // ET « Bien dit » est envoyé ensuite
         Assert.EndsWith(Expressions.BienDit, résultat);
     }
 
-    [Fact]
-    public void BonjourTest()
+    [Theory]
+    [InlineData("epsi")]
+    [InlineData("radar")]
+    public void BonjourTest(string chaîne)
     {
         // QUAND on saisit une chaîne
-        const string chaîne = "epsi";
         var résultat = DétectionPalindrome.Traiter(chaîne);
 
         // ALORS « Bonjour » est envoyé avant toute réponse
