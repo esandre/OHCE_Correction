@@ -14,7 +14,7 @@ public class PalindromeTest
 
         // ALORS celle-ci est renvoyée en miroir
         var résultatAttendu = new string(chaîne.Reverse().ToArray());
-        Assert.Equal(résultatAttendu, résultat);
+        Assert.EndsWith(résultatAttendu, résultat);
     }
 
     [Fact]
@@ -30,9 +30,19 @@ public class PalindromeTest
         // ET « Bien dit » est envoyé ensuite
         Assert.EndsWith(Expressions.BienDit, résultat);
     }
-        
+
+    [Fact]
+    public void BonjourTest()
+    {
+        // QUAND on saisit une chaîne
+        const string chaîne = "epsi";
+        var résultat = DétectionPalindrome.Traiter(chaîne);
+
+        // ALORS « Bonjour » est envoyé avant toute réponse
+        Assert.StartsWith(Expressions.Bonjour, résultat);
+    }
+
     
-    //    QUAND on saisit une chaîne ALORS « Bonjour » est envoyé avant toute réponse
     //    QUAND on saisit une chaîne ALORS « Au revoir » est envoyé en dernier
 
 }
