@@ -49,15 +49,18 @@ public class PalindromeTest
     private static IEnumerable<string> ChaînesATester 
         => new[] { "epsi", "radar" };
 
-    public static IEnumerable<object[]> CasBonjourTest => new CartesianData(Langues, ChaînesATester);
+    private static IEnumerable<PériodeJournée> PériodesJournée
+        => new[] { PériodeJournée.Default, PériodeJournée.Matin, PériodeJournée.AprèsMidi, PériodeJournée.Soir, PériodeJournée.Nuit };
+
+    public static IEnumerable<object[]> CasBonjourTest 
+        => new CartesianData(Langues, PériodesJournée, ChaînesATester);
 
     [Theory]
     [MemberData(nameof(CasBonjourTest))]
-    public void BonjourTest(ILangue langue, string chaîne)
+    public void BonjourTest(ILangue langue, PériodeJournée période, string chaîne)
     {
         // ETANT DONNE un utilisateur parlant une langue
         // ET que la période de la journée est <période>
-        var période = PériodeJournée.Matin;
         var ohce = new DétectionPalindromeBuilder()
             .AyantPourLangue(langue)
             .AyantPourPériodeDeLaJournée(période)
