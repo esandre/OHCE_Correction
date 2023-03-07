@@ -1,5 +1,3 @@
-using System.Threading.Channels;
-
 namespace OHCE.Test;
 
 public class PalindromeTest
@@ -20,6 +18,9 @@ public class PalindromeTest
     [Fact]
     public void BienDitTest()
     {
+        // ETANT DONNE un utilisateur parlant une langue
+        var langue = new LangueFrançaise();
+
         // QUAND on saisit un palindrome
         const string palindrome = "radar";
         var résultat = DétectionPalindrome.Traiter(palindrome);
@@ -31,8 +32,8 @@ public class PalindromeTest
         var finPalindrome = premièreOccurrence + palindrome.Length;
         var résultatAprèsPalindrome = résultat[finPalindrome..];
 
-        // ET « Bien dit » est envoyé ensuite
-        Assert.StartsWith(Expressions.BienDit, résultatAprèsPalindrome);
+        // ET le « Bien dit »  de cette langue est envoyé ensuite
+        Assert.StartsWith(langue.Félicitations, résultatAprèsPalindrome);
     }
 
     [Theory]
@@ -59,4 +60,9 @@ public class PalindromeTest
         Assert.EndsWith(Expressions.AuRevoir, résultat);
     }
 
+    
+    // ETANT DONNE un utilisateur parlant une langue QUAND on saisit une chaîne
+    //    ALORS<bonjour> de cette langue est envoyé avant tout
+    // ETANT DONNE un utilisateur parlant une langue QUAND
+    //    on saisit une chaîne ALORS<auRevoir> dans cette langue est envoyé en dernier
 }
