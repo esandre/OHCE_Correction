@@ -16,7 +16,4 @@ public class DétectionPalindrome
         if(miroir.Equals(chaîne)) return Expressions.Bonjour + miroir + _langue.Félicitations + Expressions.AuRevoir;
         return Expressions.Bonjour + miroir + Expressions.AuRevoir;
     }
-
-    [Obsolete]
-    public static string Traiter(string chaîne) => new DétectionPalindrome(new LangueFrançaise()).TraiterChaîne(chaîne);
 }

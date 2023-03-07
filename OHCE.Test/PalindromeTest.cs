@@ -1,3 +1,5 @@
+using OHCE.Test.Utilities;
+
 namespace OHCE.Test;
 
 public class PalindromeTest
@@ -8,7 +10,7 @@ public class PalindromeTest
     public void TestMiroir(string chaîne)
     {
         // QUAND on saisit une chaîne
-        var résultat = DétectionPalindrome.Traiter(chaîne);
+        var résultat = DétectionPalindromeBuilder.Default.TraiterChaîne(chaîne);
 
         // ALORS celle-ci est renvoyée en miroir
         var résultatAttendu = new string(chaîne.Reverse().ToArray());
@@ -23,7 +25,10 @@ public class PalindromeTest
 
         // QUAND on saisit un palindrome
         const string palindrome = "radar";
-        var résultat = DétectionPalindrome.Traiter(palindrome);
+        var résultat = new DétectionPalindromeBuilder()
+            .AyantPourLangue(langue)
+            .Build()
+            .TraiterChaîne(palindrome);
 
         // ALORS celui-ci est renvoyé
         Assert.Contains(palindrome, résultat);
@@ -44,7 +49,10 @@ public class PalindromeTest
 
         // QUAND on saisit un palindrome
         const string palindrome = "radar";
-        var résultat = new DétectionPalindrome(langue).TraiterChaîne(palindrome);
+        var résultat = new DétectionPalindromeBuilder()
+            .AyantPourLangue(langue)
+            .Build()
+            .TraiterChaîne(palindrome);
 
         // ALORS celui-ci est renvoyé
         Assert.Contains(palindrome, résultat);
@@ -63,7 +71,7 @@ public class PalindromeTest
     public void BonjourTest(string chaîne)
     {
         // QUAND on saisit une chaîne
-        var résultat = DétectionPalindrome.Traiter(chaîne);
+        var résultat = DétectionPalindromeBuilder.Default.TraiterChaîne(chaîne);
 
         // ALORS « Bonjour » est envoyé avant toute réponse
         Assert.StartsWith(Expressions.Bonjour, résultat);
@@ -75,7 +83,7 @@ public class PalindromeTest
     public void AuRevoirTest(string chaîne)
     {
         // QUAND on saisit une chaîne
-        var résultat = DétectionPalindrome.Traiter(chaîne);
+        var résultat = DétectionPalindromeBuilder.Default.TraiterChaîne(chaîne);
 
         // ALORS « Au revoir » est envoyé en dernier
         Assert.EndsWith(Expressions.AuRevoir, résultat);
