@@ -1,5 +1,4 @@
 using OHCE.Test.Utilities;
-using System;
 
 namespace OHCE.Test;
 
@@ -18,14 +17,10 @@ public class PalindromeTest
         Assert.Contains(résultatAttendu, résultat);
     }
 
-    public static IEnumerable<object[]> Langues => new[]
-    {
-        new object[] { new LangueAnglaise() },
-        new object[] { new LangueFrançaise() }
-    };
+    public static IEnumerable<object[]> CasBienDitTest => new CartesianData(Langues);
 
     [Theory]
-    [MemberData(nameof(Langues))]
+    [MemberData(nameof(CasBienDitTest))]
     public void BienDitTest(ILangue langue)
     {
         // ETANT DONNE un utilisateur parlant <langue>
@@ -48,13 +43,13 @@ public class PalindromeTest
         Assert.StartsWith(langue.Félicitations, résultatAprèsPalindrome);
     }
 
-    public static IEnumerable<object[]> CasBonjourTest => new[]
-    {
-        new object[] { new LangueAnglaise(), "epsi" },
-        new object[] { new LangueAnglaise(), "radar" },
-        new object[] { new LangueFrançaise(), "epsi" },
-        new object[] { new LangueFrançaise(), "radar" }
-    };
+    private static IEnumerable<ILangue> Langues 
+        => new ILangue[] { new LangueAnglaise(), new LangueFrançaise() };
+
+    private static IEnumerable<string> ChaînesATester 
+        => new[] { "epsi", "radar" };
+
+    public static IEnumerable<object[]> CasBonjourTest => new CartesianData(Langues, ChaînesATester);
 
     [Theory]
     [MemberData(nameof(CasBonjourTest))]
@@ -75,13 +70,8 @@ public class PalindromeTest
         Assert.StartsWith(langue.Salutation(période), résultat);
     }
 
-    public static IEnumerable<object[]> CasAuRevoirTest => new[]
-    {
-        new object[] { new LangueAnglaise(), "epsi" },
-        new object[] { new LangueAnglaise(), "radar" },
-        new object[] { new LangueFrançaise(), "epsi" },
-        new object[] { new LangueFrançaise(), "radar" }
-    };
+    public static IEnumerable<object[]> CasAuRevoirTest
+        => new CartesianData(Langues, ChaînesATester);
 
     [Theory]
     [MemberData(nameof(CasAuRevoirTest))]
