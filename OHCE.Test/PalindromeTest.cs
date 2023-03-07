@@ -74,15 +74,14 @@ public class PalindromeTest
     }
 
     public static IEnumerable<object[]> CasAuRevoirTest
-        => new CartesianData(Langues, ChaînesATester);
+        => new CartesianData(Langues, PériodesJournée, ChaînesATester);
 
     [Theory]
     [MemberData(nameof(CasAuRevoirTest))]
-    public void AuRevoirTest(ILangue langue, string chaîne)
+    public void AuRevoirTest(ILangue langue, PériodeJournée période, string chaîne)
     {
         // ETANT DONNE un utilisateur parlant une langue
         // ET que la période de la journée est<période>
-        var période = PériodeJournée.Default;
         var ohce = new DétectionPalindromeBuilder()
             .AyantPourLangue(langue)
             .AyantPourPériodeDeLaJournée(période)
