@@ -28,7 +28,7 @@ public class PalindromeTest
         Assert.StartsWith(palindrome, résultat);
 
         // ET « Bien dit » est envoyé ensuite
-        Assert.EndsWith("Bien dit !", résultat);
+        Assert.EndsWith(Expressions.BienDit, résultat);
     }
         
     
