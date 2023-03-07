@@ -1,3 +1,5 @@
+using System.Threading.Channels;
+
 namespace OHCE.Test;
 
 public class PalindromeTest
@@ -15,8 +17,21 @@ public class PalindromeTest
         Assert.Equal(résultatAttendu, résultat);
     }
 
+    [Fact]
+    public void BienDitTest()
+    {
+        // QUAND on saisit un palindrome
+        const string palindrome = "radar";
+        var résultat = DétectionPalindrome.Traiter(palindrome);
+
+        // ALORS celui-ci est renvoyé
+        Assert.StartsWith(palindrome, résultat);
+
+        // ET « Bien dit » est envoyé ensuite
+        Assert.EndsWith("Bien dit !", résultat);
+    }
         
-    //QUAND on saisit un palindrome ALORS celui-ci est renvoyé ET « Bien dit » est envoyé ensuite
+    
     //    QUAND on saisit une chaîne ALORS « Bonjour » est envoyé avant toute réponse
     //    QUAND on saisit une chaîne ALORS « Au revoir » est envoyé en dernier
 
