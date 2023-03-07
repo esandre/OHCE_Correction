@@ -15,14 +15,24 @@ public class LangueFrançaiseTest
         Assert.Equal(Expressions.BienDit, félicitations);
     }
 
-    [Fact]
-    public void BonjourTest()
+    public static IEnumerable<object[]> PériodesJournée => new[]
+    {
+        new object[] { PériodeJournée.Default },
+        new object[] { PériodeJournée.Matin },
+        new object[] { PériodeJournée.AprèsMidi },
+        new object[] { PériodeJournée.Soir },
+        new object[] { PériodeJournée.Nuit },
+    };
+
+    [Theory]
+    [MemberData(nameof(PériodesJournée))]
+    public void BonjourTest(PériodeJournée période)
     {
         // ETANT DONNE la langue française
         var langue = new LangueFrançaise();
 
         // QUAND demande comment saluer
-        var félicitations = langue.Salutation;
+        var félicitations = langue.Salutation(période);
 
         // ALORS on obtient "Bonjour"
         Assert.Equal(Expressions.Bonjour, félicitations);
