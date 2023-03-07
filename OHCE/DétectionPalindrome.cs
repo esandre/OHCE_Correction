@@ -1,12 +1,19 @@
 ﻿namespace OHCE;
 
-public static class DétectionPalindrome
+public class DétectionPalindrome
 {
-    public static string Traiter(string chaîne)
+    private readonly ILangue _langue;
+
+    public DétectionPalindrome(ILangue langue)
+    {
+        _langue = langue;
+    }
+
+    public string TraiterChaîne(string chaîne)
     {
         var miroir = new string(chaîne.Reverse().ToArray());
 
-        if(miroir.Equals(chaîne)) return Expressions.Bonjour + miroir + Expressions.BienDit + Expressions.AuRevoir;
-        return Expressions.Bonjour + miroir + Expressions.AuRevoir;
+        if(miroir.Equals(chaîne)) return _langue.Salutation + miroir + _langue.Félicitations + _langue.Acquittance;
+        return _langue.Salutation + miroir + _langue.Acquittance;
     }
 }
