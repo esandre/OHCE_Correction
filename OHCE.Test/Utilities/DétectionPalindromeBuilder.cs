@@ -9,7 +9,7 @@ internal class DétectionPalindromeBuilder
     
     public DétectionPalindrome Build()
     {
-        return new DétectionPalindrome(_langue);
+        return new DétectionPalindrome(_langue, _période);
     }
 
     public DétectionPalindromeBuilder AyantPourLangue(ILangue langue)
