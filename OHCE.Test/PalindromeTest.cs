@@ -14,7 +14,7 @@ public class PalindromeTest
 
         // ALORS celle-ci est renvoyée en miroir
         var résultatAttendu = new string(chaîne.Reverse().ToArray());
-        Assert.EndsWith(résultatAttendu, résultat);
+        Assert.Contains(résultatAttendu, résultat);
     }
 
     [Fact]
@@ -43,7 +43,16 @@ public class PalindromeTest
         Assert.StartsWith(Expressions.Bonjour, résultat);
     }
 
-    
-    //    QUAND on saisit une chaîne ALORS « Au revoir » est envoyé en dernier
+    [Theory]
+    [InlineData("epsi")]
+    //[InlineData("radar")]
+    public void AuRevoirTest(string chaîne)
+    {
+        // QUAND on saisit une chaîne
+        var résultat = DétectionPalindrome.Traiter(chaîne);
+
+        // ALORS « Au revoir » est envoyé en dernier
+        Assert.EndsWith(Expressions.AuRevoir, résultat);
+    }
 
 }

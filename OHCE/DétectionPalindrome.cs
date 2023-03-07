@@ -7,6 +7,6 @@ public static class DétectionPalindrome
         var miroir = new string(chaîne.Reverse().ToArray());
 
         if(miroir.Equals(chaîne)) return Expressions.Bonjour + miroir + Expressions.BienDit;
-        return Expressions.Bonjour + miroir;
+        return Expressions.Bonjour + miroir + Expressions.AuRevoir;
     }
 }
