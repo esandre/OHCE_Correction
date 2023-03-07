@@ -27,8 +27,12 @@ public class PalindromeTest
         // ALORS celui-ci est renvoyé
         Assert.Contains(palindrome, résultat);
 
+        var premièreOccurrence = résultat.IndexOf(palindrome, StringComparison.Ordinal);
+        var finPalindrome = premièreOccurrence + palindrome.Length;
+        var résultatAprèsPalindrome = résultat[finPalindrome..];
+
         // ET « Bien dit » est envoyé ensuite
-        Assert.EndsWith(Expressions.BienDit, résultat);
+        Assert.StartsWith(Expressions.BienDit, résultatAprèsPalindrome);
     }
 
     [Theory]
@@ -45,7 +49,7 @@ public class PalindromeTest
 
     [Theory]
     [InlineData("epsi")]
-    //[InlineData("radar")]
+    [InlineData("radar")]
     public void AuRevoirTest(string chaîne)
     {
         // QUAND on saisit une chaîne
