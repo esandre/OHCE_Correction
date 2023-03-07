@@ -1,4 +1,6 @@
-﻿namespace OHCE.Test;
+﻿using OHCE.Test.Utilities;
+
+namespace OHCE.Test;
 
 public class LangueAnglaiseTest
 {
@@ -15,27 +17,32 @@ public class LangueAnglaiseTest
         Assert.Equal(Expressions.WellSaid, félicitations);
     }
 
-    [Fact]
-    public void HelloTest()
+    public static IEnumerable<object[]> PériodesJournée
+        => new CartesianData(PrimitivesCartésiennes.PériodesJournée);
+
+    [Theory]
+    [MemberData(nameof(PériodesJournée))]
+    public void HelloTest(PériodeJournée période)
     {
         // ETANT DONNE la langue anglaise
         var langue = new LangueAnglaise();
 
         // QUAND demande comment saluer
-        var félicitations = langue.Salutation;
+        var félicitations = langue.Salutation(période);
 
         // ALORS on obtient "Hello"
         Assert.Equal(Expressions.Hello, félicitations);
     }
 
-    [Fact]
-    public void GoodbyeTest()
+    [Theory]
+    [MemberData(nameof(PériodesJournée))]
+    public void GoodbyeTest(PériodeJournée période)
     {
         // ETANT DONNE la langue anglaise
         var langue = new LangueAnglaise();
 
         // QUAND demande comment s'acquitter
-        var félicitations = langue.Acquittance;
+        var félicitations = langue.Acquittance(période);
 
         // ALORS on obtient "Au revoir"
         Assert.Equal(Expressions.Goodbye, félicitations);

@@ -5,6 +5,12 @@ internal class DétectionPalindromeBuilder
     public static DétectionPalindrome Default => new DétectionPalindromeBuilder().Build();
 
     private ILangue _langue = new LangueStub();
+    private PériodeJournée _période = PériodeJournée.Default;
+    
+    public DétectionPalindrome Build()
+    {
+        return new DétectionPalindrome(_langue, _période);
+    }
 
     public DétectionPalindromeBuilder AyantPourLangue(ILangue langue)
     {
@@ -12,8 +18,9 @@ internal class DétectionPalindromeBuilder
         return this;
     }
 
-    public DétectionPalindrome Build()
+    public DétectionPalindromeBuilder AyantPourPériodeDeLaJournée(PériodeJournée période)
     {
-        return new DétectionPalindrome(_langue);
+        _période = période;
+        return this;
     }
 }

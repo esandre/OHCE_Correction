@@ -1,5 +1,4 @@
 using OHCE.Test.Utilities;
-using System;
 
 namespace OHCE.Test;
 
@@ -18,14 +17,10 @@ public class PalindromeTest
         Assert.Contains(résultatAttendu, résultat);
     }
 
-    public static IEnumerable<object[]> Langues => new[]
-    {
-        new object[] { new LangueAnglaise() },
-        new object[] { new LangueFrançaise() }
-    };
+    public static IEnumerable<object[]> CasBienDitTest => new CartesianData(PrimitivesCartésiennes.Langues);
 
     [Theory]
-    [MemberData(nameof(Langues))]
+    [MemberData(nameof(CasBienDitTest))]
     public void BienDitTest(ILangue langue)
     {
         // ETANT DONNE un utilisateur parlant <langue>
@@ -48,51 +43,48 @@ public class PalindromeTest
         Assert.StartsWith(langue.Félicitations, résultatAprèsPalindrome);
     }
 
-    public static IEnumerable<object[]> CasBonjourTest => new[]
-    {
-        new object[] { new LangueAnglaise(), "epsi" },
-        new object[] { new LangueAnglaise(), "radar" },
-        new object[] { new LangueFrançaise(), "epsi" },
-        new object[] { new LangueFrançaise(), "radar" }
-    };
+    private static IEnumerable<string> ChaînesATester 
+        => new[] { "epsi", "radar" };
+
+    public static IEnumerable<object[]> CasBonjourTest 
+        => new CartesianData(PrimitivesCartésiennes.Langues, PrimitivesCartésiennes.PériodesJournée, ChaînesATester);
 
     [Theory]
     [MemberData(nameof(CasBonjourTest))]
-    public void BonjourTest(ILangue langue, string chaîne)
+    public void BonjourTest(ILangue langue, PériodeJournée période, string chaîne)
     {
         // ETANT DONNE un utilisateur parlant une langue
+        // ET que la période de la journée est <période>
         var ohce = new DétectionPalindromeBuilder()
             .AyantPourLangue(langue)
+            .AyantPourPériodeDeLaJournée(période)
             .Build();
 
         // QUAND on saisit une chaîne
         var résultat = ohce.TraiterChaîne(chaîne);
 
-        // ALORS le « Bonjour » de cette langue est envoyé avant toute réponse
-        Assert.StartsWith(langue.Salutation, résultat);
+        // ALORS le « Bonjour » de cette langue à cette période est envoyé avant toute réponse
+        Assert.StartsWith(langue.Salutation(période), résultat);
     }
 
-    public static IEnumerable<object[]> CasAuRevoirTest => new[]
-    {
-        new object[] { new LangueAnglaise(), "epsi" },
-        new object[] { new LangueAnglaise(), "radar" },
-        new object[] { new LangueFrançaise(), "epsi" },
-        new object[] { new LangueFrançaise(), "radar" }
-    };
+    public static IEnumerable<object[]> CasAuRevoirTest
+        => new CartesianData(PrimitivesCartésiennes.Langues, PrimitivesCartésiennes.PériodesJournée, ChaînesATester);
 
     [Theory]
     [MemberData(nameof(CasAuRevoirTest))]
-    public void AuRevoirTest(ILangue langue, string chaîne)
+    public void AuRevoirTest(ILangue langue, PériodeJournée période, string chaîne)
     {
         // ETANT DONNE un utilisateur parlant une langue
+        // ET que la période de la journée est<période>
         var ohce = new DétectionPalindromeBuilder()
             .AyantPourLangue(langue)
+            .AyantPourPériodeDeLaJournée(période)
             .Build();
 
         // QUAND on saisit une chaîne
         var résultat = ohce.TraiterChaîne(chaîne);
 
-        // ALORS le « Au revoir » de cette langue est envoyé en dernier
-        Assert.EndsWith(langue.Acquittance, résultat);
+        // ALORS le « Au revoir » de cette langue à cette période est envoyé en dernier
+        Assert.EndsWith(langue.Acquittance(période), résultat);
     }
 }
