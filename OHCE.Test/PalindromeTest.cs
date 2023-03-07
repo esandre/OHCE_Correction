@@ -16,14 +16,35 @@ public class PalindromeTest
     }
 
     [Fact]
-    public void BienDitTest()
+    public void BienDitFRTest()
     {
-        // ETANT DONNE un utilisateur parlant une langue
+        // ETANT DONNE un utilisateur parlant français
         var langue = new LangueFrançaise();
 
         // QUAND on saisit un palindrome
         const string palindrome = "radar";
         var résultat = DétectionPalindrome.Traiter(palindrome);
+
+        // ALORS celui-ci est renvoyé
+        Assert.Contains(palindrome, résultat);
+
+        var premièreOccurrence = résultat.IndexOf(palindrome, StringComparison.Ordinal);
+        var finPalindrome = premièreOccurrence + palindrome.Length;
+        var résultatAprèsPalindrome = résultat[finPalindrome..];
+
+        // ET le « Bien dit » de cette langue est envoyé ensuite
+        Assert.StartsWith(langue.Félicitations, résultatAprèsPalindrome);
+    }
+
+    [Fact]
+    public void BienDitENTest()
+    {
+        // ETANT DONNE un utilisateur parlant anglais
+        var langue = new LangueAnglaise();
+
+        // QUAND on saisit un palindrome
+        const string palindrome = "radar";
+        var résultat = new DétectionPalindrome(langue).TraiterChaîne(palindrome);
 
         // ALORS celui-ci est renvoyé
         Assert.Contains(palindrome, résultat);
