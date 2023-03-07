@@ -81,32 +81,17 @@ public class PalindromeTest
     public void AuRevoirTest(ILangue langue, string chaîne)
     {
         // ETANT DONNE un utilisateur parlant une langue
+        // ET que la période de la journée est<période>
+        var période = PériodeJournée.Default;
         var ohce = new DétectionPalindromeBuilder()
             .AyantPourLangue(langue)
+            .AyantPourPériodeDeLaJournée(période)
             .Build();
 
         // QUAND on saisit une chaîne
         var résultat = ohce.TraiterChaîne(chaîne);
 
-        // ALORS le « Au revoir » de cette langue est envoyé en dernier
-        Assert.EndsWith(langue.Acquittance, résultat);
+        // ALORS le « Au revoir » de cette langue à cette période est envoyé en dernier
+        Assert.EndsWith(langue.Acquittance(période), résultat);
     }
-
-    //ETANT DONNE un utilisateur parlant une langue
-    //ET que la période de la journée est <période>
-    //QUAND on saisit une chaîne
-    //ALORS <salutation> de cette langue à cette période est envoyé avant tout
-    //CAS {‘matin’, ‘bonjour_am’}
-    //CAS {‘après-midi’, ‘bonjour_pm’}
-    //CAS {‘soirée’, ‘bonjour_soir’}
-    //CAS {‘nuit’, ‘bonjour_nuit’}
-
-    //ETANT DONNE un utilisateur parlant une langue
-    //ET que la période de la journée est <période>
-    //QUAND on saisit une chaîne
-    //ALORS <auRevoir> dans cette langue à cette période est envoyé en dernier
-    //CAS {‘matin’, ‘auRevoir_am’}
-    //CAS {‘après-midi’, ‘auRevoir _pm’}
-    //CAS {‘soirée’, ‘auRevoir _soir’}
-    //CAS {‘nuit’, ‘auRevoir _nuit’}
 }

@@ -9,5 +9,5 @@ internal class LangueStub : ILangue
     public string Salutation(PériodeJournée _) => default!;
 
     /// <inheritdoc />
-    public string Acquittance => default!;
+    public string Acquittance(PériodeJournée _) => default!;
 }

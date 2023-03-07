@@ -38,14 +38,15 @@ public class LangueAnglaiseTest
         Assert.Equal(Expressions.Hello, félicitations);
     }
 
-    [Fact]
-    public void GoodbyeTest()
+    [Theory]
+    [MemberData(nameof(PériodesJournée))]
+    public void GoodbyeTest(PériodeJournée période)
     {
         // ETANT DONNE la langue anglaise
         var langue = new LangueAnglaise();
 
         // QUAND demande comment s'acquitter
-        var félicitations = langue.Acquittance;
+        var félicitations = langue.Acquittance(période);
 
         // ALORS on obtient "Au revoir"
         Assert.Equal(Expressions.Goodbye, félicitations);
