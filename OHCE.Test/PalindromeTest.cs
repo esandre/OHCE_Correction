@@ -1,4 +1,5 @@
 using OHCE.Test.Utilities;
+using System;
 
 namespace OHCE.Test;
 
@@ -52,11 +53,17 @@ public class PalindromeTest
     [InlineData("radar")]
     public void BonjourTest(string chaîne)
     {
-        // QUAND on saisit une chaîne
-        var résultat = DétectionPalindromeBuilder.Default.TraiterChaîne(chaîne);
+        // ETANT DONNE un utilisateur parlant une langue
+        var langue = new LangueFrançaise();
+        var ohce = new DétectionPalindromeBuilder()
+            .AyantPourLangue(langue)
+            .Build();
 
-        // ALORS « Bonjour » est envoyé avant toute réponse
-        Assert.StartsWith(Expressions.Bonjour, résultat);
+        // QUAND on saisit une chaîne
+        var résultat = ohce.TraiterChaîne(chaîne);
+
+        // ALORS le « Bonjour » de cette langue est envoyé avant toute réponse
+        Assert.StartsWith(langue.Salutation, résultat);
     }
 
     [Theory]
@@ -72,8 +79,7 @@ public class PalindromeTest
     }
 
     
-    // ETANT DONNE un utilisateur parlant une langue QUAND on saisit une chaîne
-    //    ALORS<bonjour> de cette langue est envoyé avant tout
+    
     // ETANT DONNE un utilisateur parlant une langue QUAND
     //    on saisit une chaîne ALORS<auRevoir> dans cette langue est envoyé en dernier
 }
