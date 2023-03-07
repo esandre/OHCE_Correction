@@ -3,6 +3,8 @@
     public static class DétectionPalindrome
     {
         public static string Traiter(string chaîne)
-            => "gnimaerts";
+        {
+            return new string(chaîne.Reverse().ToArray());
+        }
     }
 }
